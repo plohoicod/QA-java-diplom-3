@@ -1,7 +1,7 @@
 public class TestData {
     public static final String BASE_URL = "https://stellarburgers.nomoreparties.site";
 
-    public static final String BROWSER_NAME = "chrome";
+    public static final String BROWSER_NAME = "yandex";
 
     public final static String EMAIL_1 = "ydpolivttest1diplom3@mail.ru";
     public static final String PASSWORD_1 = "ydpolivtTestPassword1";

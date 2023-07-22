@@ -14,40 +14,44 @@ public class MainPagePom extends BasePom {
 
     private final By logInDownButton = By.xpath(".//button[text() = 'Войти в аккаунт']");
 
+    private final By createBurgerText = By.xpath(".//h1[text() = 'Соберите бургер']");
+
     private boolean findCreteOrderButton() {
         return find(driver, createOrderButton);
+    }
+
+    public void waitCreateBurgerText() {
+        wait(driver, createBurgerText);
+    }
+
+    public MainPagePom selectConstructorTab(String item) {
+        String constructorTabNotSelected = ".//span[text() = '%s']";
+        click(driver, By.xpath(String.format(constructorTabNotSelected, item)));
+        return new MainPagePom(driver);
+    }
+
+    public boolean checkConstructorTabIsActive(String item) {
+        String constructorTabSelected = ".//div[@class[contains(.,'tab_tab_type_current__2BEPc')]]/span[text() = '%s']";
+        wait(driver, By.xpath(String.format(constructorTabSelected, item)));
+
+        return find(driver, By.xpath(String.format(constructorTabSelected, item)));
     }
 
     public MainPagePom(WebDriver driver) {
         this.driver = driver;
     }
-
-    private void clickLogInDownButton() {
-        click(driver, logInDownButton);
-    }
-
-    private void waitForUserAccountButton() {
-        wait(driver, userAccountButton);
-    }
-
-    private void clickUserAccountButton() {
-        click(driver, userAccountButton);
-    }
-
     public LogInPom loginFromUserAccountButton() {
         waitAndClick(driver, userAccountButton);
         return new LogInPom(driver);
     }
 
     public ProfilePom goToProfilePage() {
-        waitForUserAccountButton();
-        clickUserAccountButton();
+        waitAndClick(driver, userAccountButton);
         return new ProfilePom(driver);
     }
 
     public LogInPom loginFromDownButton() {
-        waitLogInDownButton();
-        clickLogInDownButton();
+        waitAndClick(driver, logInDownButton);
         return new LogInPom(driver);
     }
 
@@ -58,9 +62,5 @@ public class MainPagePom extends BasePom {
 
     private void waitCreateOrderButton() {
        wait(driver, createOrderButton);
-    }
-
-    private void waitLogInDownButton() {
-        wait(driver, logInDownButton);
     }
 }

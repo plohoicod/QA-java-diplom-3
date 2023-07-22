@@ -57,7 +57,8 @@ public class BurgerUserAccountTest extends BurgersBaseTest {
         LogInPom logInPom = new MainPagePom(driver).loginFromUserAccountButton();
         logInPom.setEmail(TestData.EMAIL_1);
         logInPom.setPassword(TestData.PASSWORD_1);
-
-        return logInPom.goToMainPage();
+        MainPagePom mainPagePom = logInPom.goToMainPage();
+        mainPagePom.waitCreateBurgerText();
+        return mainPagePom;
     }
 }
